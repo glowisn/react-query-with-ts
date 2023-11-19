@@ -30,6 +30,10 @@ function ErrorFallback({ error, resetErrorBoundary }: ErrorFallbackProps) {
   );
 }
 
+function LoadingFallback() {
+  return <div>Loading...</div>;
+}
+
 interface DataContainerProps {
   queryKey: QueryKey;
   fetchData: FetchDataFunction;
@@ -40,7 +44,7 @@ export function DataContainer({ queryKey, fetchData }: DataContainerProps) {
     <QueryErrorResetBoundary>
       {({ reset }) => (
         <ErrorBoundary onReset={reset} FallbackComponent={ErrorFallback}>
-          <React.Suspense fallback={<div>Loading...</div>}>
+          <React.Suspense fallback={<LoadingFallback/>}>
             <DisplayData queryKey={queryKey} fetchData={fetchData} />
           </React.Suspense>
         </ErrorBoundary>
